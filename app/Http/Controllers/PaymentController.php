@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Models\Payment;
+use App\Models\Setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
 {
@@ -21,7 +23,13 @@ class PaymentController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Payments/CreatePayment');
+        $user = Auth::user();
+        $month = Setting::where('type','=', 'month', )->where('status','=','active')->get(['name AS label', 'value', 'id AS key']);
+        return Inertia::render('Payments/CreatePayment', [
+            'record' => new Payment(),
+            'user' => $user,
+            'month' => $month,
+        ]);
     }
 
     /**
@@ -45,7 +53,12 @@ class PaymentController extends Controller
      */
     public function edit(Payment $payment)
     {
-        return Inertia::render('Payments/CreatePayment');
+        $user = Auth::user();
+        $month = Setting::where('type','=', 'month', )->where('status','=','active')->get(['name AS label', 'value', 'id AS key']);
+        return Inertia::render('Payments/CreatePayment', [
+            'user' => $user,
+            'month' => $month,
+        ]);
     }
 
     /**

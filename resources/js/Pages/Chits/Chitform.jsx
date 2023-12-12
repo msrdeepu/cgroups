@@ -15,7 +15,7 @@ import { Link, Head } from "@inertiajs/react";
 
 const { TextArea } = Input;
 
-const Chitform = () => {
+const Chitform = ({ month }) => {
     const [form] = Form.useForm();
     return (
         <Form form={form} layout="vertical">
@@ -28,51 +28,29 @@ const Chitform = () => {
                 <Col xs={24} md={12}>
                     <Form.Item label="Start Month" name={"stmonth"}>
                         <Select
-                            defaultValue="lucy"
-                            style={{
-                                width: "100%",
-                            }}
-                            //onChange={handleChange}
-                            options={[
-                                {
-                                    value: "jack",
-                                    label: "Jack",
-                                },
-                                {
-                                    value: "lucy",
-                                    label: "Lucy",
-                                },
-                                {
-                                    value: "Yiminghe",
-                                    label: "yiminghe",
-                                },
-                            ]}
-                        />
+                            placeholder="Please Select Start Month"
+                            style={{ width: "100%" }}
+                        >
+                            {month.map((option, index) => (
+                                <Option key={index} value={option.value}>
+                                    {option.label}
+                                </Option>
+                            ))}
+                        </Select>
                     </Form.Item>
                 </Col>
                 <Col xs={24} md={12}>
                     <Form.Item label="End Month" name={"enmonth"}>
                         <Select
-                            defaultValue="lucy"
-                            style={{
-                                width: "100%",
-                            }}
-                            //onChange={handleChange}
-                            options={[
-                                {
-                                    value: "jack",
-                                    label: "Jack",
-                                },
-                                {
-                                    value: "lucy",
-                                    label: "Lucy",
-                                },
-                                {
-                                    value: "Yiminghe",
-                                    label: "yiminghe",
-                                },
-                            ]}
-                        />
+                            placeholder="Please Select End Month"
+                            style={{ width: "100%" }}
+                        >
+                            {month.map((option, index) => (
+                                <Option key={index} value={option.value}>
+                                    {option.label}
+                                </Option>
+                            ))}
+                        </Select>
                     </Form.Item>
                 </Col>
                 <Col xs={24} md={12}>
@@ -103,7 +81,7 @@ const Chitform = () => {
                 </Col>
                 <Col xs={24}>
                     <Form.Item label="Other Details" name={"othdetails"}>
-                       <TextArea rows={4} placeholder="Other Details" />
+                        <TextArea rows={4} placeholder="Other Details" />
                     </Form.Item>
                 </Col>
             </Row>

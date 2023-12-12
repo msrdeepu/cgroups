@@ -3,19 +3,19 @@
 namespace App\Http\Controllers;
 
 use Inertia\Inertia;
-use App\Models\Chit;
+use App\Models\Payout;
 use App\Models\Setting;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class ChitController extends Controller
+class PayoutController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return Inertia::render('Chits/Chitlist');
+        return Inertia::render('Payouts/Payoutlist');
     }
 
     /**
@@ -25,8 +25,8 @@ class ChitController extends Controller
     {
         $user = Auth::user();
         $month = Setting::where('type','=', 'month', )->where('status','=','active')->get(['name AS label', 'value', 'id AS key']);
-        return Inertia::render('Chits/CreateChit', [
-            'record' => new Chit(),
+        return Inertia::render('Payouts/CreatePayout', [
+            'record' => new Payout(),
             'user' => $user,
             'month' => $month,
         ]);
@@ -43,7 +43,7 @@ class ChitController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Chit $chit)
+    public function show(Payout $payout)
     {
         //
     }
@@ -51,11 +51,11 @@ class ChitController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Chit $chit)
+    public function edit(Payout $payout)
     {
         $user = Auth::user();
         $month = Setting::where('type','=', 'month', )->where('status','=','active')->get(['name AS label', 'value', 'id AS key']);
-        return Inertia::render('Chits/CreateChit', [
+        return Inertia::render('Payouts/CreatePayout', [
             'user' => $user,
             'month' => $month,
         ]);
@@ -64,7 +64,7 @@ class ChitController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Chit $chit)
+    public function update(Request $request, Payout $payout)
     {
         //
     }
@@ -72,7 +72,7 @@ class ChitController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Chit $chit)
+    public function destroy(Payout $payout)
     {
         //
     }

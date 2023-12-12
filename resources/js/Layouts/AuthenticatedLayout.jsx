@@ -16,7 +16,9 @@ import {
     UserAddOutlined,
     GroupOutlined,
     DollarOutlined,
+    FullscreenOutlined,
 } from "@ant-design/icons";
+
 import {
     Col,
     Layout,
@@ -125,6 +127,15 @@ export default function Authenticated({ header, children }) {
                             label: (
                                 <Link href={window.route("payment.index")}>
                                     Payments
+                                </Link>
+                            ),
+                        },
+                        {
+                            key: "payout",
+                            icon: <FullscreenOutlined />,
+                            label: (
+                                <Link href={window.route("payout.index")}>
+                                    Payouts
                                 </Link>
                             ),
                         },

@@ -6,6 +6,7 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ChitController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PayoutController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -63,6 +64,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/payment-create', [PaymentController::class, 'create'])->name('payment.create');
     Route::post('/payment-store', [PaymentController::class, 'store'])->name('payment.store');
     Route::delete('/payment-delete/{id}', [PaymentController::class, 'destroy']) -> name('payment.destroy');
+
+    Route::get('/payout', [PayoutController::class, 'index'])->name('payout.index');
+    Route::get('/payout-create', [PayoutController::class, 'create'])->name('payout.create');
 });
 
 require __DIR__.'/auth.php';

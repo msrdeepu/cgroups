@@ -4,13 +4,13 @@ import { Card, Typography } from "antd";
 
 import Paymentform from "./Paymentform";
 
-function CreatePayment(props) {
+function CreatePayment({ props, month }) {
     return (
         <>
             <Head title="Dashboard" />
 
             <Card title={`Add New Payment`}>
-               <Paymentform />
+                <Paymentform month={month} />
             </Card>
         </>
     );
