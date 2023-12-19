@@ -11,8 +11,25 @@ return new class extends Migration
      */
     public function up(): void
     {
+
+        // gpname: "",
+// stmonth: "",
+// enmonth: "",
+// tgpvalue: "",
+// tmembers: "",
+// mpamount: "",
+// tinstalments: "",
+// othdetails: "",
         Schema::create('chits', function (Blueprint $table) {
             $table->id();
+            $table->text('gpname')->nullable();
+            $table->string('stmonth')->nullable();
+            $table->text('enmonth')->nullable();
+            $table->bigInteger('tgpvalue')->nullable();
+            $table->bigInteger('tmembers')->nullable();
+            $table->bigInteger('mpamount')->nullable();
+            $table->bigInteger('tinstalments')->nullable();
+            $table->text('othdetails')->nullable();
             $table->timestamps();
         });
     }

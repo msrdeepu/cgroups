@@ -48,7 +48,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
     Route::get('/settings-create', [SettingController::class, 'create'])->name('settings.create');
     Route::post('/settings-store', [SettingController::class, 'store'])->name('settings.store');
-    Route::delete('/settings-delete/{id}', [CustomerController::class, 'destroy']) -> name('settings.destroy');
+    Route::delete('/settings-delete/{id}', [SettingController::class, 'destroy']) -> name('settings.destroy');
 
     Route::get('/members', [MemberController::class, 'index'])->name('members.index');
     Route::get('/members-create', [MemberController::class, 'create'])->name('members.create');
@@ -58,7 +58,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/group', [ChitController::class, 'index'])->name('group.index');
     Route::get('/group-create', [ChitController::class, 'create'])->name('group.create');
     Route::post('/group-store', [ChitController::class, 'store'])->name('group.store');
+    Route::get('/group/{id}/edit',[ChitController::class, 'edit'])->name('group.edit');
+    Route::patch('/group/{id}', [ChitController::class, 'update'])->name('group.update');
     Route::delete('/group-delete/{id}', [ChitController::class, 'destroy']) -> name('group.destroy');
+    
 
     Route::get('/payment', [PaymentController::class, 'index'])->name('payment.index');
     Route::get('/payment-create', [PaymentController::class, 'create'])->name('payment.create');

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Inertia\Inertia;
 use App\Models\Setting;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 class SettingController extends Controller
 {
     /**
@@ -60,8 +60,8 @@ class SettingController extends Controller
         $setting= Setting::find($id);
         return Inertia::render('Settings/Createsettings', [
             'user' => $user,
-            'settingsList' => $employes,
-            'record' => $employ,
+            'settingsList' => $settings,
+            'record' => $setting,
         ]);
     }
 

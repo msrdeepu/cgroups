@@ -15,7 +15,11 @@ class ChitController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Chits/Chitlist');
+        $resource = Chit::get(['*', 'id as key']);
+        $chits = Chit::get(['id','gpname', 'stmonth', 'enmonth','tgpvalue','tmembers', 'mpamount', 'tinstalments', 'othdetails']);
+        return Inertia::render('Chits/Chitlist', [
+            'chitList' => $chits,
+        ]);
     }
 
     /**
@@ -37,7 +41,10 @@ class ChitController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $requestData = $request->all();
+        $data= Chit::create($requestData);
+        $data->save();
+        return to_route('group.index');
     }
 
     /**
@@ -51,29 +58,37 @@ class ChitController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Chit $chit)
+    public function edit(Chit $chit, $id)
     {
         $user = Auth::user();
+        $chits = Chit::get(['id', 'gpname', 'stmonth', 'enmonth', 'tgpvalue', 'tmembers', 'mpamount', 'tinstalments', 'othdetails']);
+        $chit= Chit::find($id);
         $month = Setting::where('type','=', 'month', )->where('status','=','active')->get(['name AS label', 'value', 'id AS key']);
         return Inertia::render('Chits/CreateChit', [
             'user' => $user,
             'month' => $month,
+            'chitList' => $chits,
+            'record' => $chit,
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Chit $chit)
+    public function update(Request $request, Chit $chit, $id)
     {
-        //
+        $chit = Chit::find($id);
+        $requestData = $request -> all();
+        $updated = $chit -> update($requestData);
+        return to_route('group.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Chit $chit)
+    public function destroy(Chit $chit, $id)
     {
-        //
+        $chit = Chit::find($id);
+        $chit->delete();
     }
 }
