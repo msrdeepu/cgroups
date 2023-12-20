@@ -28,6 +28,7 @@ return new class extends Migration
             $table->bigInteger('tgpvalue')->nullable();
             $table->bigInteger('tmembers')->nullable();
             $table->bigInteger('mpamount')->nullable();
+            $table->text('status')->nullable();
             $table->bigInteger('tinstalments')->nullable();
             $table->text('othdetails')->nullable();
             $table->timestamps();

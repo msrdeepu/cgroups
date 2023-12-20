@@ -4,7 +4,7 @@ import { Card, Typography } from "antd";
 
 import Chitform from "./Chitform";
 
-function CreateChit({ props, month, saveBtn, record, chitList }) {
+function CreateChit({ props, month, saveBtn, record, chitList, status }) {
     const { data, setData, post, processing, errors, patch } = useForm({
         gpname: record.gpname,
         stmonth: record.stmonth,
@@ -12,6 +12,7 @@ function CreateChit({ props, month, saveBtn, record, chitList }) {
         tgpvalue: record.tgpvalue,
         tmembers: record.tmembers,
         mpamount: record.mpamount,
+        status: record.status,
         tinstalments: record.tinstalments,
         othdetails: record.othdetails,
     });
@@ -34,6 +35,7 @@ function CreateChit({ props, month, saveBtn, record, chitList }) {
                     month={month}
                     data={data}
                     setData={setData}
+                    status={status}
                     saveBtn={record.id == undefined ? "Add" : "Save"}
                     submitHandler={
                         record.id == undefined ? submitHandler : updateHandler

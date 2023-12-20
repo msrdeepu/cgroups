@@ -37,6 +37,20 @@ function Chitlist({ props, chitList }) {
             sortDirections: ["descend"],
         },
         {
+            title: "Status",
+            dataIndex: "status",
+            filters: chitList.map((item) => ({
+                text: item.status,
+                value: item.status,
+            })),
+
+            // specify the condition of filtering result
+            // here is that finding the name started with `value`
+            onFilter: (value, record) => record.name.indexOf(value) === 0,
+            sorter: (a, b) => a.name.length - b.name.length,
+            sortDirections: ["descend"],
+        },
+        {
             title: "Value",
             dataIndex: "tgpvalue",
             filters: chitList.map((status) => ({

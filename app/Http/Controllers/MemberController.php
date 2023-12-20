@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use App\Models\Member;
+use App\Models\Chit;
 use Illuminate\Http\Request;
 
 class MemberController extends Controller
@@ -21,7 +22,10 @@ class MemberController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Members/CreateMember');
+        $group = Chit::where('status','=','active')->get(['gpname as label', 'id as key']);
+        return Inertia::render('Members/CreateMember',[
+            'group' => $group,
+        ]);
     }
 
     /**
@@ -45,7 +49,10 @@ class MemberController extends Controller
      */
     public function edit(Member $member)
     {
-        //
+        $group = Chit::where('status','=','active')->get(['gpname as label', 'id as key']);
+        return Inertia::render('Members/CreateMember',[
+            'group' => $group,
+        ]);
     }
 
     /**

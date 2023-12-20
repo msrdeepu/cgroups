@@ -24,7 +24,7 @@ import { Link, Head } from "@inertiajs/react";
 
 const { TextArea } = Input;
 
-const Chitform = ({ month, saveBtn, data, setData, submitHandler }) => {
+const Chitform = ({ month, saveBtn, data, setData, submitHandler, status }) => {
     const [form] = Form.useForm();
 
     const selctStartMonthHandler = (value) => {
@@ -76,7 +76,7 @@ const Chitform = ({ month, saveBtn, data, setData, submitHandler }) => {
                         </Select>
                     </Form.Item>
                 </Col>
-                <Col xs={24} md={12}>
+                <Col xs={24} md={8}>
                     <Form.Item label="End Month" name={"enmonth"}>
                         <Select
                             placeholder="Please Select End Month"
@@ -91,7 +91,7 @@ const Chitform = ({ month, saveBtn, data, setData, submitHandler }) => {
                         </Select>
                     </Form.Item>
                 </Col>
-                <Col xs={24} md={12}>
+                <Col xs={24} md={8}>
                     <Form.Item label="Total Group Value" name={"tgpvalue"}>
                         <Input
                             placeholder="Enter Total Group Value"
@@ -133,6 +133,21 @@ const Chitform = ({ month, saveBtn, data, setData, submitHandler }) => {
                                 setData("tinstalments", e.target.value)
                             }
                         />
+                    </Form.Item>
+                </Col>
+                <Col xs={24} md={8}>
+                    <Form.Item label="Status" name={"status"}>
+                        <Select
+                            placeholder="Select Status"
+                            style={{ width: "100%" }}
+                            onChange={(value) => setData("status", value)}
+                        >
+                            {status.map((option, index) => (
+                                <Option key={index} value={option.value}>
+                                    {option.label}
+                                </Option>
+                            ))}
+                        </Select>
                     </Form.Item>
                 </Col>
                 <Col xs={24}>
