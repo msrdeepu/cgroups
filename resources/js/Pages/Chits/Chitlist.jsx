@@ -149,7 +149,7 @@ function Chitlist({ props, chitList }) {
         <>
             <Head title="Manage Groups" />
             {console.log(chitList)}
-            <Card title={`Manage Groups`}>
+            <Card title={`Manage Groups`} style={{ overflow: "scroll" }}>
                 <Link href={window.route("group.create")}>
                     <Button type="primary" icon={<PlusCircleOutlined />}>
                         Create Group

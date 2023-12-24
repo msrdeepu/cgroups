@@ -13,61 +13,60 @@ import {
 const { TextArea } = Input;
 import { Link, Head } from "@inertiajs/react";
 
-const Paymentform = ({ month }) => {
+// groupname: "",
+//         month: "",
+//         member: "",
+//         phone: "",
+//         email: "",
+//         paidon: "",
+//         actamount: "",
+//         paidamount: "",
+//         balance: "",
+//         otherdetails: "",
+
+const Paymentform = ({
+    data,
+    setData,
+    member,
+    status,
+    group,
+    month,
+    amount,
+}) => {
     const [form] = Form.useForm();
     return (
         <Form form={form} layout="vertical">
             <Row gutter={[8, 4]}>
-                <Col xs={24} md={12}>
+                <Col xs={24} md={8}>
                     <Form.Item label="Select Group" name={"groupname"}>
                         {" "}
                         <Select
-                            defaultValue="lucy"
-                            style={{
-                                width: "100%",
-                            }}
-                            //onChange={handleChange}
-                            options={[
-                                {
-                                    value: "jack",
-                                    label: "Jack",
-                                },
-                                {
-                                    value: "lucy",
-                                    label: "Lucy",
-                                },
-                                {
-                                    value: "Yiminghe",
-                                    label: "yiminghe",
-                                },
-                            ]}
-                        />
+                            placeholder="Select Group"
+                            style={{ width: "100%" }}
+                            value={data.gname}
+                        >
+                            {group.map((option, index) => (
+                                <Option key={index} value={option.label}>
+                                    {option.label}
+                                </Option>
+                            ))}
+                        </Select>
                     </Form.Item>
                 </Col>
-                <Col xs={24} md={12}>
+                <Col xs={24} md={8}>
                     <Form.Item label="Select Member" name={"membername"}>
                         {" "}
                         <Select
-                            defaultValue="lucy"
-                            style={{
-                                width: "100%",
-                            }}
-                            //onChange={handleChange}
-                            options={[
-                                {
-                                    value: "jack",
-                                    label: "Jack",
-                                },
-                                {
-                                    value: "lucy",
-                                    label: "Lucy",
-                                },
-                                {
-                                    value: "Yiminghe",
-                                    label: "yiminghe",
-                                },
-                            ]}
-                        />
+                            placeholder="Select Member"
+                            style={{ width: "100%" }}
+                            value={data.gname}
+                        >
+                            {member.map((option, index) => (
+                                <Option key={index} value={option.label}>
+                                    {option.label}
+                                </Option>
+                            ))}
+                        </Select>
                     </Form.Item>
                 </Col>
                 <Col xs={24} md={8}>
@@ -88,26 +87,16 @@ const Paymentform = ({ month }) => {
                     <Form.Item label="Actual Amount" name={"actamount"}>
                         {" "}
                         <Select
-                            defaultValue="lucy"
-                            style={{
-                                width: "100%",
-                            }}
-                            //onChange={handleChange}
-                            options={[
-                                {
-                                    value: "jack",
-                                    label: "Jack",
-                                },
-                                {
-                                    value: "lucy",
-                                    label: "Lucy",
-                                },
-                                {
-                                    value: "Yiminghe",
-                                    label: "yiminghe",
-                                },
-                            ]}
-                        />
+                            placeholder="Select Actual Amount"
+                            style={{ width: "100%" }}
+                            value={data.gname}
+                        >
+                            {amount.map((option, index) => (
+                                <Option key={index} value={option.label}>
+                                    {option.label}
+                                </Option>
+                            ))}
+                        </Select>
                     </Form.Item>
                 </Col>
                 <Col xs={24} md={8}>
@@ -123,7 +112,8 @@ const Paymentform = ({ month }) => {
 
                 <Col xs={24} md={8}>
                     <Form.Item label="Received On" name={"receivedon"}>
-                        <DatePicker
+                        <input
+                            type="date"
                             style={{ width: "100%" }}
                             placeholder="receivedon"
                         />
@@ -132,6 +122,22 @@ const Paymentform = ({ month }) => {
                 <Col xs={24} md={8}>
                     <Form.Item label="Received By" name={"receivedby"}>
                         <Input placeholder="Received By" />
+                    </Form.Item>
+                </Col>
+                <Col xs={24} md={8}>
+                    <Form.Item label="Payment Status" name={"status"}>
+                        {" "}
+                        <Select
+                            placeholder="Select Status"
+                            style={{ width: "100%" }}
+                            value={data.gname}
+                        >
+                            {status.map((option, index) => (
+                                <Option key={index} value={option.label}>
+                                    {option.label}
+                                </Option>
+                            ))}
+                        </Select>
                     </Form.Item>
                 </Col>
                 <Col xs={24}>

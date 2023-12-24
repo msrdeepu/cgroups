@@ -30,7 +30,15 @@ import {
 import { Link, Head } from "@inertiajs/react";
 
 const { TextArea } = Input;
-const Memberform = ({ data, setData, saveBtn, submitHandler, group }) => {
+const Memberform = ({
+    data,
+    setData,
+    saveBtn,
+    submitHandler,
+    group,
+    month,
+    status,
+}) => {
     const [form] = Form.useForm();
 
     const groupSelectHandler = (value) => {
@@ -52,12 +60,36 @@ const Memberform = ({ data, setData, saveBtn, submitHandler, group }) => {
     };
 
     return (
-        <Form form={form} layout="vertical" onFinish={submitHandler}>
+        <Form
+            form={form}
+            layout="vertical"
+            onFinish={submitHandler}
+            autoComplete="on"
+            initialValues={{
+                mname: data.mname,
+                gname: data.gname,
+                contactnum: data.contactnum,
+                email: data.email,
+                payoutexpmonth: data.payoutexpmonth,
+                reference: data.reference,
+                referencecontact: data.referencecontact,
+                groupnum: data.groupnum,
+                grouptotalvalue: data.grouptotalvalue,
+                groupmonthlyvalue: data.groupmonthlyvalue,
+                sdate: data.sdate,
+                edate: data.edate,
+                tmonths: data.tmonths,
+                status: data.status,
+                maddress: data.maddress,
+                otherdetails: data.otherdetails,
+            }}
+        >
             <Row gutter={[8, 4]}>
                 <Col xs={24} md={12}>
                     <Form.Item label="Member Name" name={"mname"}>
                         <Input
                             placeholder="Enter Member Name"
+                            value={data.mname}
                             onChange={(e) => setData("mname", e.target.value)}
                         />
                     </Form.Item>
@@ -67,6 +99,7 @@ const Memberform = ({ data, setData, saveBtn, submitHandler, group }) => {
                         <Select
                             placeholder="Select Group"
                             style={{ width: "100%" }}
+                            value={data.gname}
                             onChange={groupSelectHandler}
                         >
                             {group.map((option, index) => (
@@ -80,6 +113,7 @@ const Memberform = ({ data, setData, saveBtn, submitHandler, group }) => {
                 <Col xs={24} md={8}>
                     <Form.Item label="Contact No:" name={"contactnum"}>
                         <Input
+                            value={data.contactnum}
                             onChange={(e) =>
                                 setData("contactnum", e.target.value)
                             }
@@ -91,6 +125,7 @@ const Memberform = ({ data, setData, saveBtn, submitHandler, group }) => {
                 <Col xs={24} md={8}>
                     <Form.Item label="Email ID" name={"email"}>
                         <Input
+                            value={data.email}
                             placeholder="Enter Email ID"
                             onChange={(e) => setData("email", e.target.value)}
                         />
@@ -102,33 +137,23 @@ const Memberform = ({ data, setData, saveBtn, submitHandler, group }) => {
                         name={"payoutexpmonth"}
                     >
                         <Select
-                            defaultValue="lucy"
-                            style={{
-                                width: "100%",
-                            }}
-                            onChange={(value) =>
-                                setData("payoutexpmonth", value)
-                            }
-                            options={[
-                                {
-                                    value: "jack",
-                                    label: "Jack",
-                                },
-                                {
-                                    value: "lucy",
-                                    label: "Lucy",
-                                },
-                                {
-                                    value: "Yiminghe",
-                                    label: "yiminghe",
-                                },
-                            ]}
-                        />
+                            placeholder="Select Month"
+                            style={{ width: "100%" }}
+                            value={data.payoutexpmonth}
+                            onChange={payoutMonthHandler}
+                        >
+                            {month.map((option, index) => (
+                                <Option key={index} value={option.label}>
+                                    {option.label}
+                                </Option>
+                            ))}
+                        </Select>
                     </Form.Item>
                 </Col>
-                <Col xs={24} md={12}>
+                <Col xs={24} md={8}>
                     <Form.Item label="Reference" name={"reference"}>
                         <Input
+                            value={data.reference}
                             placeholder="Enter Reference Name"
                             onChange={(e) =>
                                 setData("reference", e.target.value)
@@ -136,12 +161,13 @@ const Memberform = ({ data, setData, saveBtn, submitHandler, group }) => {
                         />
                     </Form.Item>
                 </Col>
-                <Col xs={24} md={12}>
+                <Col xs={24} md={8}>
                     <Form.Item
                         label="Reference Contact"
                         name={"referencecontact"}
                     >
                         <Input
+                            value={data.referencecontact}
                             placeholder="Enter Reference Contact"
                             type="number"
                             onChange={(e) =>
@@ -153,6 +179,7 @@ const Memberform = ({ data, setData, saveBtn, submitHandler, group }) => {
                 <Col xs={24} md={8}>
                     <Form.Item label="Group Number" name={"groupnum"}>
                         <Input
+                            value={data.groupnum}
                             placeholder="Enter Group Number"
                             type="number"
                             onChange={(e) =>
@@ -167,6 +194,7 @@ const Memberform = ({ data, setData, saveBtn, submitHandler, group }) => {
                         name={"grouptotalvalue"}
                     >
                         <Input
+                            value={data.grouptotalvalue}
                             placeholder="Enter Group Number"
                             type="number"
                             onChange={(e) =>
@@ -183,6 +211,7 @@ const Memberform = ({ data, setData, saveBtn, submitHandler, group }) => {
                         <Input
                             placeholder="Enter Group Number"
                             type="number"
+                            value={data.groupmonthlyvalue}
                             onChange={(e) =>
                                 setData("groupmonthlyvalue", e.target.value)
                             }
@@ -191,19 +220,23 @@ const Memberform = ({ data, setData, saveBtn, submitHandler, group }) => {
                 </Col>
                 <Col xs={24} md={8}>
                     <Form.Item label="Start Date" name={"sdate"}>
-                        <DatePicker
-                            format={dateFormat}
+                        <input
+                            type="date"
+                            // format={dateFormat}
                             style={{ width: "100%" }}
-                            onChange={handleStartDateChange}
+                            value={data.sdate}
+                            onChange={(e) => setData("sdate", e.target.value)}
                         />
                     </Form.Item>
                 </Col>
                 <Col xs={24} md={8}>
                     <Form.Item label="End Date" name={"edate"}>
-                        <DatePicker
+                        <input
+                            type="date"
                             style={{ width: "100%" }}
-                            format={dateFormat}
-                            onChange={handleEndDateChange}
+                            // format={dateFormat}
+                            value={data.edate}
+                            onChange={(e) => setData("edate", e.target.value)}
                         />
                     </Form.Item>
                 </Col>
@@ -212,8 +245,25 @@ const Memberform = ({ data, setData, saveBtn, submitHandler, group }) => {
                         <Input
                             type="number"
                             placeholder="Total Months"
+                            value={data.tmonths}
                             onChange={(e) => setData("tmonths", e.target.value)}
                         />
+                    </Form.Item>
+                </Col>
+                <Col xs={24} md={8}>
+                    <Form.Item label="Member Status" name={"status"}>
+                        <Select
+                            placeholder="Select Status"
+                            style={{ width: "100%" }}
+                            value={data.status}
+                            onChange={(value) => setData("status", value)}
+                        >
+                            {status.map((option, index) => (
+                                <Option key={index} value={option.label}>
+                                    {option.label}
+                                </Option>
+                            ))}
+                        </Select>
                     </Form.Item>
                 </Col>
                 <Col xs={24}>
@@ -221,6 +271,7 @@ const Memberform = ({ data, setData, saveBtn, submitHandler, group }) => {
                         <TextArea
                             rows={4}
                             placeholder="Member Address"
+                            value={data.maddress}
                             onChange={(e) =>
                                 setData("maddress", e.target.value)
                             }
@@ -232,6 +283,7 @@ const Memberform = ({ data, setData, saveBtn, submitHandler, group }) => {
                         <TextArea
                             rows={4}
                             placeholder="Other Details"
+                            value={data.otherdetails}
                             onChange={(e) =>
                                 setData("otherdetails", e.target.value)
                             }
