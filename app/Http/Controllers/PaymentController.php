@@ -17,9 +17,9 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        
-        $payments = Payment::get(['id', 'groupname', 'monthname','membername', 'receivedon', 'actamount', 'paidamount', 'remainamount', 'receivedby', 'pstatus', 'remarks']);
-        return Inertia::render('Payments/Paymentlist',[
+
+        $payments = Payment::get(['id', 'groupname', 'monthname', 'membername', 'receivedon', 'actamount', 'paidamount', 'remainamount', 'receivedby', 'pstatus', 'remarks']);
+        return Inertia::render('Payments/Paymentlist', [
             'payments' => $payments,
         ]);
     }
@@ -30,12 +30,11 @@ class PaymentController extends Controller
     public function create()
     {
         $user = Auth::user();
-        $payments = Payment::get(['id', 'groupname', 'monthname','membername', 'receivedon', 'actamount', 'paidamount', 'remainamount', 'receivedby', 'pstatus', 'remarks']);
-        $status = Setting::where('type', '=', 'status',) -> where('status', '=','active') -> get(['name as label', 'value', 'id as key']);
-        $group = Chit::where('status','=','active')->get(['gpname as label', 'id as key']);
-        $member = Member::where('status', '=', 'active') -> get(['mname as label', 'id as key']);
-        $amount = Chit::where('status','=','active')->get(['tgpvalue as label', 'id as key']);
-        $month = Setting::where('type','=', 'month', )->where('status','=','active')->get(['name AS label', 'value', 'id AS key']);
+        $status = Setting::where('type', '=', 'status',)->where('status', '=', 'active')->get(['name as label', 'value', 'id as key']);
+        $group = Chit::where('status', '=', 'active')->get(['gpname as label', 'id as key']);
+        $member = Member::where('status', '=', 'active')->get(['mname as label', 'id as key']);
+        $amount = Chit::where('status', '=', 'active')->get(['tgpvalue as label', 'id as key']);
+        $month = Setting::where('type', '=', 'month',)->where('status', '=', 'active')->get(['name AS label', 'value', 'id AS key']);
         return Inertia::render('Payments/CreatePayment', [
             'record' => new Payment(),
             'user' => $user,
@@ -53,10 +52,10 @@ class PaymentController extends Controller
     public function store(Request $request)
     {
         $requestData = $request->all();
-         $data= Payment::create($requestData);
-         $data->save();
- 
-         return to_route('payment.index');
+        $data = Payment::create($requestData);
+        $data->save();
+
+        return to_route('payment.index');
     }
 
     /**
@@ -73,13 +72,13 @@ class PaymentController extends Controller
     public function edit(Payment $payment, $id)
     {
         $user = Auth::user();
-        $payment= Payment::find($id);
-        $payments = Payment::get(['id', 'groupname', 'monthname','membername', 'receivedon', 'actamount', 'paidamount', 'remainamount', 'receivedby', 'pstatus', 'remarks']);
-        $status = Setting::where('type', '=', 'status',) -> where('status', '=','active') -> get(['name as label', 'value', 'id as key']);
-        $group = Chit::where('status','=','active')->get(['gpname as label', 'id as key']);
-        $member = Member::where('status', '=', 'active') -> get(['mname as label', 'id as key']);
-        $amount = Chit::where('status','=','active')->get(['tgpvalue as label', 'id as key']);
-        $month = Setting::where('type','=', 'month', )->where('status','=','active')->get(['name AS label', 'value', 'id AS key']);
+        $payment = Payment::find($id);
+        $payments = Payment::get(['id', 'groupname', 'monthname', 'membername', 'receivedon', 'actamount', 'paidamount', 'remainamount', 'receivedby', 'pstatus', 'remarks']);
+        $status = Setting::where('type', '=', 'status',)->where('status', '=', 'active')->get(['name as label', 'value', 'id as key']);
+        $group = Chit::where('status', '=', 'active')->get(['gpname as label', 'id as key']);
+        $member = Member::where('status', '=', 'active')->get(['mname as label', 'id as key']);
+        $amount = Chit::where('status', '=', 'active')->get(['tgpvalue as label', 'id as key']);
+        $month = Setting::where('type', '=', 'month',)->where('status', '=', 'active')->get(['name AS label', 'value', 'id AS key']);
         return Inertia::render('Payments/CreatePayment', [
             'user' => $user,
             'month' => $month,
@@ -98,8 +97,8 @@ class PaymentController extends Controller
     public function update(Request $request, $id)
     {
         $payment = Payment::find($id);
-        $requestData = $request -> all();
-        $updated = $payment -> update($requestData);
+        $requestData = $request->all();
+        $updated = $payment->update($requestData);
         return to_route('payment.index');
     }
 
