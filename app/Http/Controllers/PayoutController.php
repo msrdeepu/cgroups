@@ -17,7 +17,10 @@ class PayoutController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Payouts/Payoutlist');
+        $payouts = Payout::get(['id', 'group', 'month', 'member', 'phone', 'email', 'paidon', 'amtopay', 'paidamount', 'remaining', 'status', 'otherdetails']);
+        return Inertia::render('Payouts/Payoutlist', [
+            'payouts' => $payouts,
+        ]);
     }
 
     /**
@@ -65,9 +68,11 @@ class PayoutController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Payout $payout)
+    public function edit(Payout $payout, $id)
     {
         $user = Auth::user();
+        $payout = Payout::find($id);
+        $payouts = Payout::get(['id', 'group', 'month', 'member', 'phone', 'email', 'paidon', 'amtopay', 'paidamount', 'remaining', 'status', 'otherdetails']);
         $status = Setting::where('type', '=', 'status',)->where('status', '=', 'active')->get(['name as label', 'value', 'id as key']);
         $group = Chit::where('status', '=', 'active')->get(['gpname as label', 'id as key']);
         $member = Member::where('status', '=', 'active')->get(['mname as label', 'id as key']);
@@ -80,6 +85,8 @@ class PayoutController extends Controller
             'group' => $group,
             'member' => $member,
             'amount' => $amount,
+            'payouts' => $payouts,
+            'record' => $payout,
         ]);
     }
 

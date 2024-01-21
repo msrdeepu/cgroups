@@ -5,17 +5,17 @@ import PayoutForm from "./PayoutForm";
 
 function Dashboard({ props, month, status, group, member, amount, record }) {
     const { data, setData, post, processing, errors, patch } = useForm({
-        group: "",
-        month: "",
-        member: "",
-        phone: "",
-        email: "",
-        paidon: "",
-        amtopay: "",
-        paidamount: "",
-        remaining: "",
-        status: "",
-        otherdetails: "",
+        group: record.group,
+        month: record.month,
+        member: record.member,
+        phone: record.phone,
+        email: record.email,
+        paidon: record.paidon,
+        amtopay: record.amtopay,
+        paidamount: record.paidamount,
+        remaining: record.remaining,
+        status: record.status,
+        otherdetails: record.otherdetails,
     });
 
     const submitHandler = () => {

@@ -16,7 +16,23 @@ const PayoutForm = ({
     setData,
 }) => {
     return (
-        <Form layout="vertical" onFinish={submitHandler}>
+        <Form
+            layout="vertical"
+            onFinish={submitHandler}
+            initialValues={{
+                group: data.group,
+                month: data.month,
+                member: data.member,
+                phone: data.phone,
+                email: data.email,
+                paidon: data.paidon,
+                amtopay: data.amtopay,
+                paidamount: data.paidamount,
+                remaining: data.remaining,
+                status: data.status,
+                otherdetails: data.otherdetails,
+            }}
+        >
             <Row gutter={[8, 4]}>
                 <Col xs={24} md={12}>
                     <Form.Item label="Select Group" name={"group"}>
