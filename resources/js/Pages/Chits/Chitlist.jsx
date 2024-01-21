@@ -3,11 +3,11 @@ import { Head, Link, router } from "@inertiajs/react";
 import { Card, Typography, Button, Table, Space } from "antd";
 import {
     PlusCircleOutlined,
-    SearchOutlined,
     EditOutlined,
     DeleteOutlined,
     EyeOutlined,
 } from "@ant-design/icons";
+import "../../../css/style.css";
 
 function Chitlist({ props, chitList }) {
     //destroy record
@@ -149,7 +149,7 @@ function Chitlist({ props, chitList }) {
         <>
             <Head title="Manage Groups" />
             {console.log(chitList)}
-            <Card title={`Manage Groups`} style={{ overflow: "scroll" }}>
+            <Card title={`Manage Groups`} className="tableItem">
                 <Link href={window.route("group.create")}>
                     <Button type="primary" icon={<PlusCircleOutlined />}>
                         Create Group

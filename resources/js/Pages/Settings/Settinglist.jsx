@@ -1,43 +1,26 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import React, { useRef, useState } from "react";
-import { Head, Link, usePage } from "@inertiajs/react";
+import { Head, Link, router } from "@inertiajs/react";
 import { Button, Input, Space, Table, Card, Typography } from "antd";
-import Highlighter from 'react-highlight-words';
+import Highlighter from "react-highlight-words";
 import {
     PlusCircleOutlined,
     SearchOutlined,
     EditOutlined,
     DeleteOutlined,
 } from "@ant-design/icons";
+//destroy record
+function destroyRecord(e) {
+    if (confirm("Are you sure you want to delete this record ?")) {
+        router.delete(route("settings.destroy", e.currentTarget.id));
+    }
+}
+//Loading Edit View
+function editRecord(e) {
+    router.get(route("settings.edit", e.currentTarget.id));
+}
 
-function Settinglist({props,resource, auth}) {
-
-    const data = [
-        {
-            key: "1",
-            name: "John Brown",
-            age: 32,
-            address: "New York No. 1 Lake Park",
-        },
-        {
-            key: "2",
-            name: "Joe Black",
-            age: 42,
-            address: "London No. 1 Lake Park",
-        },
-        {
-            key: "3",
-            name: "Jim Green",
-            age: 32,
-            address: "Sydney No. 1 Lake Park",
-        },
-        {
-            key: "4",
-            name: "Jim Red",
-            age: 32,
-            address: "London No. 2 Lake Park",
-        },
-    ];
+function Settinglist({ props, resource, auth }) {
     const [searchText, setSearchText] = useState("");
     const [searchedColumn, setSearchedColumn] = useState("");
     const searchInput = useRef(null);
@@ -215,16 +198,16 @@ function Settinglist({props,resource, auth}) {
                     <Button
                         style={{ margin: "5px", color: "purple" }}
                         shape="circle"
-                        //id={record.id}
-                        //onClick={editRecord}
+                        id={record.id}
+                        onClick={editRecord}
                         icon={<EditOutlined />}
                     />
                     <Button
                         style={{ margin: "5px", color: "red" }}
                         shape="circle"
-                        //id={record.id}
+                        id={record.id}
                         icon={<DeleteOutlined />}
-                        //onClick={destroyRecord}
+                        onClick={destroyRecord}
                     />
                 </Space>
             ),
@@ -236,13 +219,17 @@ function Settinglist({props,resource, auth}) {
 
             <Card title={`Welcome to Settings Management`}>
                 <div>
-                <Link href={window.route("settings.create")}>
-                    <Button icon={<PlusCircleOutlined />} type="primary">
-                        Create Settings
-                    </Button>
-                </Link>
+                    <Link href={window.route("settings.create")}>
+                        <Button icon={<PlusCircleOutlined />} type="primary">
+                            Create Settings
+                        </Button>
+                    </Link>
                 </div>
-                <Table columns={columns} dataSource={resource} />
+                <Table
+                    style={{ marginTop: "10px" }}
+                    columns={columns}
+                    dataSource={resource}
+                />
             </Card>
         </>
     );

@@ -1,0 +1,8 @@
+.tableItem {
+    overflow: scroll;
+}
+.tableItem::-webkit-scrollbar {
+    display: none;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}

@@ -48,6 +48,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
     Route::get('/settings-create', [SettingController::class, 'create'])->name('settings.create');
     Route::post('/settings-store', [SettingController::class, 'store'])->name('settings.store');
+    Route::get('/settings/{id}/edit',[SettingController::class, 'edit'])->name('settings.edit');
+    Route::patch('/settings/{id}', [SettingController::class, 'update'])->name('settings.update');
     Route::delete('/settings-delete/{id}', [SettingController::class, 'destroy']) -> name('settings.destroy');
 
 

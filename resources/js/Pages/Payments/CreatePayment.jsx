@@ -4,19 +4,38 @@ import { Card, Typography } from "antd";
 
 import Paymentform from "./Paymentform";
 
-function CreatePayment({ props, month, member, group, status, amount }) {
+function CreatePayment({
+    props,
+    user,
+    month,
+    status,
+    group,
+    member,
+    amount,
+    record,
+    payments,
+}) {
     const { data, setData, post, processing, errors, patch } = useForm({
-        groupname: "",
-        month: "",
-        member: "",
-        phone: "",
-        email: "",
-        paidon: "",
-        actamount: "",
-        paidamount: "",
-        balance: "",
-        otherdetails: "",
+        groupname: record.groupname,
+        monthname: record.monthname,
+        membername: record.membername,
+        receivedon: record.receivedon,
+        actamount: record.actamount,
+        paidamount: record.paidamount,
+        remainamount: record.remainamount,
+        receivedby: record.receivedby,
+        pstatus: record.pstatus,
+        remarks: record.remarks,
     });
+
+    const submitHandler = () => {
+        console.log(data);
+        post("/payment-store");
+    };
+
+    const updateHandler = (values) => {
+        patch(`/payment/${record.id}`, data);
+    };
     return (
         <>
             <Head title="Dashboard" />
@@ -30,6 +49,10 @@ function CreatePayment({ props, month, member, group, status, amount }) {
                     data={data}
                     amount={amount}
                     setData={setData}
+                    saveBtn={record.id == undefined ? "Add" : "Update"}
+                    submitHandler={
+                        record.id == undefined ? submitHandler : updateHandler
+                    }
                 />
             </Card>
         </>

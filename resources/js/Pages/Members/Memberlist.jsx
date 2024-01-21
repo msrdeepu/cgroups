@@ -9,6 +9,8 @@ import {
     EyeOutlined,
 } from "@ant-design/icons";
 
+import "../../../css/style.css";
+
 function Memberlist({ props, memberList, record }) {
     //destroy record
     function destroyRecord(e) {
@@ -164,14 +166,13 @@ function Memberlist({ props, memberList, record }) {
         <>
             <Head title="Dashboard" />
 
-            <Card title={`Manage Members`} style={{ overflow: "scroll" }}>
+            <Card title={`Manage Members`} className="tableItem">
                 <Link href={window.route("members.create")}>
                     <Button type="primary" icon={<PlusCircleOutlined />}>
                         Add New Member
                     </Button>
                 </Link>
                 <Table
-                    style={{ marginTop: "10px" }}
                     columns={columns}
                     dataSource={memberList}
                     onChange={onChange}

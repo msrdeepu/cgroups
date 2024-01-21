@@ -94,15 +94,15 @@ export default function Authenticated({ header, children }) {
                                 </Link>
                             ),
                         },
-                        {
-                            key: "employes",
-                            icon: <UsergroupAddOutlined />,
-                            label: (
-                                <Link href={window.route("employes.index")}>
-                                    Employes
-                                </Link>
-                            ),
-                        },
+                        // {
+                        //     key: "employes",
+                        //     icon: <UsergroupAddOutlined />,
+                        //     label: (
+                        //         <Link href={window.route("employes.index")}>
+                        //             Employes
+                        //         </Link>
+                        //     ),
+                        // },
                         {
                             key: "group",
                             icon: <GroupOutlined />,

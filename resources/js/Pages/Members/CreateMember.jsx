@@ -39,7 +39,7 @@ function CreateMember({ props, saveBtn, group, month, status, record }) {
                 <Memberform
                     data={data}
                     setData={setData}
-                    saveBtn="Save"
+                    saveBtn={record.id == undefined ? "Add" : "Save"}
                     group={group}
                     month={month}
                     status={status}

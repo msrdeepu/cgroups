@@ -8,11 +8,23 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     * 
+        
      */
     public function up(): void
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
+            $table->string('groupname')->nullable();
+            $table->string('monthname')->nullable();
+            $table->string('membername')->nullable();
+            $table->string('receivedon')->nullable();
+            $table->bigInteger('actamount')->nullable();
+            $table->bigInteger('paidamount')->nullable();
+            $table->bigInteger('remainamount')->nullable();
+            $table->string('receivedby')->nullable();
+            $table->string('pstatus')->nullable();
+            $table->string('remarks')->nullable();
             $table->timestamps();
         });
     }

@@ -2,13 +2,25 @@ import React from "react";
 import { Button, Checkbox, Form, Input, Col, Divider, Row, Select } from "antd";
 import { Head, Link, useForm } from "@inertiajs/react";
 
-const Settingform = ({ submitHandler, data, setData }) => {
+const Settingform = ({ submitHandler, data, setData, saveBtn }) => {
     const [form] = Form.useForm();
     const statusSelectHandler = (value) => {
         setData("status", value);
     };
     return (
-        <Form form={form} onFinish={submitHandler} layout="vertical">
+        <Form
+            form={form}
+            onFinish={submitHandler}
+            layout="vertical"
+            initialValues={{
+                type: data.type,
+                name: data.name,
+                value: data.value,
+                pcode: data.pcode,
+                dorder: data.dorder,
+                status: data.status,
+            }}
+        >
             <Row gutter={[8, 4]}>
                 <Col xs={24} md={12}>
                     <Form.Item label="Type" name="type">
@@ -57,10 +69,13 @@ const Settingform = ({ submitHandler, data, setData }) => {
                             placeholder="Select Status"
                             onChange={statusSelectHandler}
                         >
-                        
                             <Select.Option value="active">Active</Select.Option>
-                            <Select.Option value="inactive">InActive</Select.Option>
-                            <Select.Option value="completed">Completed</Select.Option>
+                            <Select.Option value="inactive">
+                                InActive
+                            </Select.Option>
+                            <Select.Option value="completed">
+                                Completed
+                            </Select.Option>
                         </Select>
                     </Form.Item>
                 </Col>
@@ -77,7 +92,7 @@ const Settingform = ({ submitHandler, data, setData }) => {
                     type="primary"
                     style={{ margin: "6px" }}
                 >
-                    Submit
+                    {saveBtn}
                 </Button>
                 <Link href={window.route("settings.index")} type="button">
                     <Button type="primary" danger style={{ margin: "6px" }}>

@@ -68,9 +68,12 @@ class SettingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Setting $setting)
+    public function update(Request $request, Setting $setting, $id)
     {
-        //
+        $setting = Setting::find($id);
+        $requestData = $request -> all();
+        $updated = $setting -> update($requestData);
+        return to_route('settings.index');
     }
 
     /**
