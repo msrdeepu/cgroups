@@ -238,7 +238,7 @@ function Chitlist({ props, chitList }) {
                     </Button>
                 </Link>
                 <Table
-                    style={{ marginTop: "10px" }}
+                    className="tableTopMargin"
                     columns={columns}
                     dataSource={chitList}
                     onChange={onChange}

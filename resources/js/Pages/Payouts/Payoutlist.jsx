@@ -225,6 +225,7 @@ function Dashboard({ props, payouts, record }) {
                     </Button>
                 </Link>
                 <Table
+                    className="tableTopMargin"
                     columns={columns}
                     dataSource={payouts}
                     onChange={onChange}

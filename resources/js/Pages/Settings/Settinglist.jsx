@@ -226,6 +226,7 @@ function Settinglist({ props, resource, auth }) {
                     </Link>
                 </div>
                 <Table
+                    className="tableTopMargin"
                     style={{ marginTop: "10px" }}
                     columns={columns}
                     dataSource={resource}

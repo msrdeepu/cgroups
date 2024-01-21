@@ -227,6 +227,7 @@ function Memberlist({ props, memberList, record }) {
                     </Button>
                 </Link>
                 <Table
+                    className="tableTopMargin"
                     columns={columns}
                     dataSource={memberList}
                     onChange={onChange}

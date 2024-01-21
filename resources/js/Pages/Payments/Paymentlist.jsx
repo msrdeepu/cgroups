@@ -228,6 +228,7 @@ function Paymentlist({ payments }) {
                     </Button>
                 </Link>
                 <Table
+                    className="tableTopMargin"
                     columns={columns}
                     dataSource={payments}
                     onChange={onChange}
