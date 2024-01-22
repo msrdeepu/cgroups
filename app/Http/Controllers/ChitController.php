@@ -16,7 +16,7 @@ class ChitController extends Controller
     public function index()
     {
         $resource = Chit::get(['*', 'id as key']);
-        $chits = Chit::get(['id','gpname', 'stmonth', 'enmonth','tgpvalue','status','tmembers', 'mpamount', 'tinstalments', 'othdetails']);
+        $chits = Chit::get(['id', 'gpname', 'stmonth', 'enmonth', 'tgpvalue', 'status', 'tmembers', 'mpamount', 'tinstalments', 'othdetails']);
         return Inertia::render('Chits/Chitlist', [
             'chitList' => $chits,
         ]);
@@ -28,8 +28,8 @@ class ChitController extends Controller
     public function create()
     {
         $user = Auth::user();
-        $month = Setting::where('type','=', 'month', )->where('status','=','active')->get(['name AS label', 'value', 'id AS key']);
-        $status = Setting::where('type', '=', 'status',) -> where('status', '=','active') -> get(['name as label', 'value', 'id as key']);
+        $month = Setting::where('type', '=', 'month',)->where('status', '=', 'active')->get(['name AS label', 'value', 'id AS key']);
+        $status = Setting::where('type', '=', 'status',)->where('status', '=', 'active')->get(['name as label', 'value', 'id as key']);
         return Inertia::render('Chits/CreateChit', [
             'record' => new Chit(),
             'user' => $user,
@@ -44,7 +44,7 @@ class ChitController extends Controller
     public function store(Request $request)
     {
         $requestData = $request->all();
-        $data= Chit::create($requestData);
+        $data = Chit::create($requestData);
         $data->save();
         return to_route('group.index');
     }
@@ -52,9 +52,21 @@ class ChitController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Chit $chit)
+    public function show(Chit $chit, $id)
     {
-        //
+        $user = Auth::user();
+        $chits = Chit::get(['id', 'gpname', 'stmonth', 'enmonth', 'status', 'tgpvalue', 'tmembers', 'mpamount', 'tinstalments', 'othdetails']);
+        $chit = Chit::find($id);
+        $status = Setting::where('type', '=', 'status',)->where('status', '=', 'active')->get(['name as label', 'value', 'id as key']);
+        $month = Setting::where('type', '=', 'month',)->where('status', '=', 'active')->get(['name AS label', 'value', 'id AS key']);
+        return Inertia::render('Chits/Cdetails', [
+            'user' => $user,
+            'month' => $month,
+            'chitList' => $chits,
+            'record' => $chit,
+            'status' => $status,
+
+        ]);
     }
 
     /**
@@ -63,10 +75,10 @@ class ChitController extends Controller
     public function edit(Chit $chit, $id)
     {
         $user = Auth::user();
-        $chits = Chit::get(['id', 'gpname', 'stmonth', 'enmonth','status', 'tgpvalue', 'tmembers', 'mpamount', 'tinstalments', 'othdetails']);
-        $chit= Chit::find($id);
-        $status = Setting::where('type', '=', 'status',) -> where('status', '=','active') -> get(['name as label', 'value', 'id as key']);
-        $month = Setting::where('type','=', 'month', )->where('status','=','active')->get(['name AS label', 'value', 'id AS key']);
+        $chits = Chit::get(['id', 'gpname', 'stmonth', 'enmonth', 'status', 'tgpvalue', 'tmembers', 'mpamount', 'tinstalments', 'othdetails']);
+        $chit = Chit::find($id);
+        $status = Setting::where('type', '=', 'status',)->where('status', '=', 'active')->get(['name as label', 'value', 'id as key']);
+        $month = Setting::where('type', '=', 'month',)->where('status', '=', 'active')->get(['name AS label', 'value', 'id AS key']);
         return Inertia::render('Chits/CreateChit', [
             'user' => $user,
             'month' => $month,
@@ -82,8 +94,8 @@ class ChitController extends Controller
     public function update(Request $request, Chit $chit, $id)
     {
         $chit = Chit::find($id);
-        $requestData = $request -> all();
-        $updated = $chit -> update($requestData);
+        $requestData = $request->all();
+        $updated = $chit->update($requestData);
         return to_route('group.index');
     }
 

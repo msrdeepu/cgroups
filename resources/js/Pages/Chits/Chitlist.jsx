@@ -142,6 +142,9 @@ function Chitlist({ props, chitList }) {
             router.delete(route("group.destroy", e.currentTarget.id));
         }
     }
+    function detailsHandler(e) {
+        router.get(route("group.show", e.currentTarget.id));
+    }
 
     //Loading Edit View
     function editRecord(e) {
@@ -210,7 +213,13 @@ function Chitlist({ props, chitList }) {
                     <Button shape="circle" id={record.id} onClick={editRecord}>
                         {<EditOutlined />}
                     </Button>
-                    <Button>{<EyeOutlined />}</Button>
+                    <Button
+                        onClick={detailsHandler}
+                        id={record.id}
+                        shape="circle"
+                    >
+                        {<EyeOutlined />}
+                    </Button>
                     <Button
                         shape="circle"
                         danger
