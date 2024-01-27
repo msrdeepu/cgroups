@@ -3,6 +3,7 @@ import { Head, useForm } from "@inertiajs/react";
 import { Card, Typography } from "antd";
 
 import Chitform from "./Chitform";
+import Cdetails from "./Cdetails";
 
 function CreateChit({ props, month, saveBtn, record, chitList, status }) {
     const { data, setData, post, processing, errors, patch } = useForm({
@@ -42,6 +43,9 @@ function CreateChit({ props, month, saveBtn, record, chitList, status }) {
                     }
                 />
             </Card>
+            <div style={{ display: "none" }}>
+                <Cdetails data={data} />
+            </div>
         </>
     );
 }

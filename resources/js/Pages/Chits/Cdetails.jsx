@@ -12,9 +12,10 @@ import {
 } from "@ant-design/icons";
 import "../../../css/style.css";
 
-function Cdetails({ chitList, record }) {
+function Cdetails({ chitList, record, data }) {
     return (
         <>
+            {console.log(data)}
             <Head title="Manage Groups" />
             {/* {console.log(param)} */}
             <Card title={`User Details`} className="tableItem">

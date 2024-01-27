@@ -8,7 +8,7 @@ import { ConfigProvider } from "antd";
 import theme from "./theme";
 
 const appName =
-    window.document.getElementsByTagName("title")[0]?.innerText || "Laravel";
+    window.document.getElementsByTagName("title")[0]?.innerText || "GROUPS";
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
